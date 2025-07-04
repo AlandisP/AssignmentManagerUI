@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" styleClass="apane" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aui.controllers.EditScreenController">
+   <children>
+      <HBox id="apane" prefHeight="49.0" prefWidth="75.0" AnchorPane.bottomAnchor="551.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="925.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView id="backButton" fx:id="backButtonEdit" fill="WHITE" glyphName="BACKWARD" onMouseClicked="#backButton" size="50" styleClass="backButton" wrappingWidth="41.214284896850586" />
+         </children></HBox>
+      <Line endX="917.0" layoutX="71.0" layoutY="57.0" startX="-57.5" strokeWidth="5.0" />
+      <Text id="title" fx:id="title" fill="WHITE" layoutX="352.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Edit Assignment" textAlignment="CENTER" wrappingWidth="277.689453125">
+         <font>
+            <Font name="Arial Black" size="28.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView fill="WHITE" glyphName="USER" layoutX="630.0" layoutY="43.0" size="50" wrappingWidth="46.5" />
+      <VBox id="editVB" fillWidth="false" layoutX="14.0" layoutY="129.0" prefHeight="463.0" prefWidth="365.0" styleClass="editVB">
+         <children>
+            <VBox fillWidth="false" prefHeight="66.0" prefWidth="331.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Change Name:" wrappingWidth="253.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nameTB" prefHeight="25.0" prefWidth="532.0" styleClass="editTB" />
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox fillWidth="false" prefHeight="143.0" prefWidth="331.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Change Description:" wrappingWidth="253.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <TextArea fx:id="descriptionTB" prefHeight="117.0" prefWidth="331.0" styleClass="editTB" />
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox fillWidth="false" prefHeight="66.0" prefWidth="331.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Change Due Date:" wrappingWidth="253.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <DatePicker fx:id="calendarBox" prefHeight="25.0" prefWidth="336.0" />
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox fillWidth="false" prefHeight="66.0" prefWidth="331.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Completion Status:" wrappingWidth="253.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <ChoiceBox fx:id="completionBox" prefWidth="150.0" styleClass="editTB" />
+               </children>
+            </VBox>
+         </children></VBox>
+      <Label id="nameLabel" fx:id="nameLabel" layoutX="-2.0" layoutY="70.0" prefHeight="50.0" prefWidth="1000.0" styleClass="nameLabel" textAlignment="CENTER">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <VBox id="editVB" fillWidth="false" layoutX="608.0" layoutY="129.0" prefHeight="463.0" prefWidth="365.0" styleClass="editVB">
+         <children>
+            <VBox fillWidth="false" prefHeight="43.0" prefWidth="368.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Current Details" textAlignment="CENTER" wrappingWidth="345.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox prefHeight="134.0" prefWidth="368.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Description:" wrappingWidth="146.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Label id="detailsTB" fx:id="descriptionLabel" alignment="TOP_LEFT" prefHeight="117.0" prefWidth="368.0" styleClass="editTB" />
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox prefHeight="67.0" prefWidth="368.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Due Date:" wrappingWidth="146.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Label id="detailsTB" fx:id="duedateLabel" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="368.0" styleClass="editTB" />
+               </children>
+            </VBox>
+            <Line endX="253.2928924560547" endY="-2.278174877166748" startX="-100.0" strokeWidth="10.0" />
+            <VBox prefHeight="67.0" prefWidth="368.0">
+               <children>
+                  <Text id="textEC" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textEC" text="Status:" wrappingWidth="146.041015625">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Label id="detailsTB" fx:id="statusLabel" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="368.0" styleClass="editTB" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <FontAwesomeIconView fill="WHITE" glyphName="EDIT" layoutX="466.0" layoutY="326.0" size="100" />
+      <Button fx:id="confirmButton" layoutX="430.0" layoutY="456.0" mnemonicParsing="false" onAction="#confirm" prefHeight="76.0" prefWidth="137.0" text="Confirm">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Label fx:id="savedLabel" layoutX="463.0" layoutY="544.0" text="Saved!" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

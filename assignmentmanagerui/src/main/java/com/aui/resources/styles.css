@@ -1,0 +1,142 @@
+.table-view {
+    -fx-background-color: royalblue;
+    -fx-border-width: 4px;
+    -fx-border-color: black;
+    -fx-border-radius: 12px; /* Rounds the border corners */
+    -fx-background-radius: 10px;
+}
+
+.table-view:focused {
+    -fx-background-color: rgb(9, 69, 248);
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: rgb(38, 25, 117);
+
+}
+
+
+.table-view .column-header{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #2747ba;
+    -fx-background-radius: 5pt 5pt 5pt 5pt; /* Rounds top corners */
+    -fx-border-color: transparent transparent black transparent;
+    -fx-border-width: 3px;
+    -fx-padding: 5px 0;
+}
+
+.table-view .cell {
+    -fx-cell-size: 4em;
+    -fx-wrap-text: true;
+}
+
+
+.apane {
+    -fx-background-color: linear-gradient(dimgrey 0%, #1a1818 100%);
+}
+
+.table-view .column-header-background .label {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell .table-cell {
+    -fx-border-width: 0px 2px 0px 2px;
+    -fx-border-color: black;
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgb(23, 116, 255);
+}
+
+.button {
+    -fx-background-color: royalblue;
+    -fx-border-width: 3px;
+    -fx-background-insets: 0;
+    -fx-border-color: black;
+    -fx-background-radius: 40;
+    -fx-border-radius: 40;
+    -fx-text-fill: white;
+    -fx-font-family: "Copperplate";
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: rgb(0, 144, 240);
+}
+
+.button:pressed {
+    -fx-background-color: rgb(0, 144, 240);
+}
+
+.progresstxt {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+}
+
+
+.title {
+    -fx-alignment: center;
+}
+
+.progress-bar {
+    -fx-accent: rgb(46, 226, 46);
+}
+
+.nameLabel {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+.textEC {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.editVB {
+    -fx-background-color: linear-gradient(royalblue 25%, #009be2 75%);
+    -fx-background-radius: 10px;
+    -fx-border-color: black;
+    -fx-border-radius: 10px; 
+    -fx-border-width: 5px;
+}
+
+.editTB {
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: black;
+    -fx-font-weight: 700;
+    -fx-font-size: 15px;
+}
+
+.backButton:hover {
+    -fx-fill: black;
+}
+
+.progress-indicator {
+    -fx-progress-color: royalblue;
+}
+
+.progress-indicator .text {
+    -fx-font-family: "Copperplate";
+    -fx-font-size: 25px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
