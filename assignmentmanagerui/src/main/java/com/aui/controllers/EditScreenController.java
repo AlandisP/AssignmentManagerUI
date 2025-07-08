@@ -11,6 +11,8 @@ import com.aui.appfolder.App;
 import com.aui.model.Assignment;
 import com.aui.model.AssignmentManager;
 import com.aui.model.DataManager;
+import com.aui.model.User;
+import com.aui.model.UserList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
@@ -60,6 +62,7 @@ public class EditScreenController implements Initializable{
     private Label statusLabel;
 
     private AssignmentManager library;
+    private User currUser;
     private Assignment currAssignment;
     
 
@@ -67,7 +70,8 @@ public class EditScreenController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
 
         library = AssignmentManager.getInstance();
-        currAssignment = library.getCurrentAssignment();
+        currUser = library.getCurrentUser();
+        currAssignment = currUser.getCurrentAssignment();
 
         nameLabel.setText(currAssignment.getName());
         duedateLabel.setText(currAssignment.getDueDate());
@@ -103,7 +107,7 @@ public class EditScreenController implements Initializable{
             }
         }
         playAnimation(); 
-        DataManager.saveAssignments();
+        DataManager.saveUsers();
     }
 
     private void playAnimation() {

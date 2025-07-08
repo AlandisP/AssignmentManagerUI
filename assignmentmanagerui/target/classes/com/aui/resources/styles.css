@@ -124,6 +124,7 @@
     -fx-text-fill: black;
     -fx-font-weight: 700;
     -fx-font-size: 15px;
+    -fx-background-radius: 15px;
 }
 
 .backButton:hover {
@@ -139,4 +140,20 @@
     -fx-font-size: 25px;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+
+.login-fields {-fx-font-family: "Copperplate";
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+}
+
+.username {
+    -fx-alignment: center;
+    -fx-font-size: 30px;
+    -fx-font-family: "Copperplate";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
 }

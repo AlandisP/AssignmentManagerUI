@@ -10,6 +10,8 @@ import com.aui.appfolder.App;
 import com.aui.model.Assignment;
 import com.aui.model.AssignmentManager;
 import com.aui.model.DataManager;
+import com.aui.model.User;
+import com.aui.model.UserList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
@@ -46,11 +48,13 @@ public class AddScreenController implements Initializable {
     private TextField nameText;
 
     private AssignmentManager library;
+    private User currUser;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         library = AssignmentManager.getInstance();   
+        currUser = library.getCurrentUser();
         addedAlert.setVisible(false);
     }
 
@@ -77,9 +81,9 @@ public class AddScreenController implements Initializable {
         }
 
         Assignment a = new Assignment(name, description, date);
-        library.addAssignment(a);
+        currUser.addAssignment(a);
         playAnimation();
-        DataManager.saveAssignments();
+        DataManager.saveUsers();
     }
 
     @FXML

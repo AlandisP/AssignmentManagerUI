@@ -4,16 +4,12 @@ import java.util.ArrayList;
 public class AssignmentManager {
 
     private static AssignmentManager instance;
-    private ArrayList<Assignment> assignments;
-    private Assignment currentAssignment;
+    private UserList userList;
+    private ArrayList<User> users;
+    private User currentUser;
 
     public AssignmentManager() {
-        this.assignments = DataManager.loadAssignments();
-        if(assignments.size() > 0) {
-            currentAssignment = assignments.get(0);
-        } else {
-            currentAssignment = null;
-        }
+        userList = UserList.getInstance();
     }
 
     public static AssignmentManager getInstance() {
@@ -23,109 +19,46 @@ public class AssignmentManager {
         return instance;
      }
 
-     public ArrayList<Assignment> getAssignments() {
-        return assignments;
+     public UserList getUserList() {
+        return userList;
      }
 
-
-    public void addAssignment(Assignment a) {
-        this.assignments.add(a);
-    }
-
-    public void deleteAssignment(Assignment a) {
-        assignments.remove(a);
-    }
-
-    public boolean deleteAssignment(String name) {
-        Assignment target = findAssignmentByName(name);
-        if(target != null) {
-            assignments.remove(target);
+     public boolean login(String u, String pass) {
+        userList.getUsers();
+        currentUser = userList.getUser(u);
+        if(currentUser != null && pass.equals(currentUser.getPassword())) {
             return true;
+        } else {
+            currentUser = null;
+            return false;
         }
-        return false;   
-    }
+     }
 
-    public boolean editAssignmentName(String assignmentName, String name) {
-        Assignment target = findAssignmentByName(assignmentName);
-        if (target != null) {
-            target.setName(name);
+     public boolean createAccount(String u, String pass, String pass2) {
+        userList.getUsers();
+        if(userList.findUserByName(u) == false && pass.equals(pass2)) {
+            ArrayList<Assignment> arr = new ArrayList<>();
+            User newUser = new User(u, pass, arr);
+            userList.addUser(newUser);
+            DataManager.saveUsers();
+            currentUser = newUser;
             return true;
+            
         }
         return false;
-    }
+     }
 
-    public boolean editAssignmentDate(String assignmentName, String date) {
-        Assignment target = findAssignmentByName(assignmentName);
-        if (target != null) {
-            target.setDueDate(date);
-            return true;
-        }
-        return false;
-    }
+     public void setCurrentUser(User u) {
+        currentUser = u;
+     }
 
-    public boolean editAssignmentDescription(String assignmentName, String description) {
-        Assignment target = findAssignmentByName(assignmentName);
-        if (target != null) {
-            target.setDescription(description);
-            return true;
-        }
-        return false;
-    }
+     public User getCurrentUser() {
+        return currentUser;
+     }
 
-    public boolean changeAssignmentCompletion(String assignmentName) {
-        Assignment target = findAssignmentByName(assignmentName);
-        if (target != null) {
-            target.changeCompletion();
-        }
-        return false;
-    }
+     public void logout(){
+        currentUser = null;
+        DataManager.saveUsers();
+     }
 
-    public  Assignment findAssignmentByName(String name) {
-        for(int i = 0; i < assignments.size(); i++) {
-            if(assignments.get(i).getName().equalsIgnoreCase(name)) {
-                return assignments.get(i);
-            }
-        }
-        return null;
-    }
-
-    public boolean findAssignment(String name) {
-        for(int i = 0; i < assignments.size(); i++) {
-            if(assignments.get(i).getName().equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public String printAssignmentList() {
-        String str = "----------------------------------------------------------------\n";
-        for(int i = 0; i < assignments.size(); i++) {
-            str+= assignments.get(i).toString() + "\n----------------------------------------------------------------\n";
-        }
-        return str;
-    }
-
-    public void changeCurrentAssignment(Assignment cA) {
-        currentAssignment = cA;
-    }
-
-    public Assignment getCurrentAssignment() {
-        return currentAssignment;
-    }
-
-    public double getProgressPercentage() {
-        if (assignments.isEmpty()) {
-            return 0.0; 
-        }
-        double isCompleted = 0.0;
-        for(int i = 0; i < assignments.size(); i++) {
-            if(assignments.get(i).getIsCompleted()) {
-                isCompleted++;
-            }
-        }
-        return ((double)(isCompleted/assignments.size()));
-    }
-    
 }

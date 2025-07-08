@@ -9,6 +9,7 @@ import com.aui.appfolder.App;
 import com.aui.model.Assignment;
 import com.aui.model.AssignmentManager;
 import com.aui.model.DataManager;
+import com.aui.model.User;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,9 @@ public class TaskManagerHome implements Initializable {
     private Button editTaskButton;
 
     @FXML
+    private Label userLabel;
+
+    @FXML
     private ProgressIndicator progressIndicator;
 
     @FXML
@@ -53,11 +57,14 @@ public class TaskManagerHome implements Initializable {
     private TableColumn<Assignment, Boolean> completionColumn;
 
     private AssignmentManager library;
+    private User currUser;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         library = AssignmentManager.getInstance();
+        currUser = library.getCurrentUser();
+        userLabel.setText(currUser.getUsername());
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("description"));
@@ -65,13 +72,13 @@ public class TaskManagerHome implements Initializable {
         completionColumn.setCellValueFactory(new PropertyValueFactory<Assignment, Boolean>("isCompleted"));
 
         taskTable.setItems(getTasks());
-        progressIndicator.setProgress(library.getProgressPercentage());
+        progressIndicator.setProgress(currUser.getProgressPercentage());
     }
 
     public ObservableList<Assignment> getTasks() {
         ObservableList<Assignment> tasks = FXCollections.observableArrayList();
 
-        ArrayList<Assignment> tasksList = library.getAssignments();
+        ArrayList<Assignment> tasksList = currUser.getAssignments();
         for(int i = 0; i < tasksList.size(); i++) {
             tasks.add(tasksList.get(i));
         }
@@ -84,9 +91,9 @@ public class TaskManagerHome implements Initializable {
     void deleteTask(ActionEvent e) {
         int selectedTask = taskTable.getSelectionModel().getSelectedIndex();
         Assignment selectedA = taskTable.getSelectionModel().getSelectedItem();
-        library.deleteAssignment(selectedA);
+        currUser.deleteAssignment(selectedA);
         taskTable.getItems().remove(selectedTask);
-        DataManager.saveAssignments();
+        DataManager.saveUsers();
         updateProgress();
     }
 
@@ -94,7 +101,7 @@ public class TaskManagerHome implements Initializable {
     void editTask(ActionEvent e) throws IOException {
         Assignment selectedAssignment = taskTable.getSelectionModel().getSelectedItem();
          if (selectedAssignment != null) {
-            library.changeCurrentAssignment(selectedAssignment);    
+            currUser.changeCurrentAssignment(selectedAssignment);    
             App.setRoot("editScreen");     
          }
          
@@ -106,8 +113,15 @@ public class TaskManagerHome implements Initializable {
     }
 
     private void updateProgress() {
-    progressIndicator.setProgress(library.getProgressPercentage() / 100.0);
-}
+        progressIndicator.setProgress(currUser.getProgressPercentage() / 100.0);
+    }
+
+    @FXML
+    void logout(ActionEvent e) throws IOException {
+        library.logout();
+        App.setRoot("loginScreen");
+
+    }
 
 
 

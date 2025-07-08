@@ -1,29 +1,37 @@
 package com.aui.model;
 
-import java.util.*;
-import org.json.simple.parser.*;
-import org.json.simple.*;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.io.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 public class DataManager {
 
     private static final String DATA_DIR = System.getProperty("user.home");
-    private static final String JSON_FILE_PATH = "assignmentmanagerui/src/main/java/com/aui/data/UserAssignments.json";
+    private static final String JSON_FILE_PATH = "assignmentmanagerui/src/main/java/com/aui/data/Users.json";
 
-    public static void saveAssignments() {
-        AssignmentManager aM = AssignmentManager.getInstance();
-        ArrayList<Assignment> assignments = aM.getAssignments();
+    public static void saveUsers() {
+        UserList uL = UserList.getInstance();
+        ArrayList<User> users = uL.getUsers();
         JSONArray list = new JSONArray();
-        for(int i = 0; i < assignments.size(); i++) {
-            JSONObject a = new JSONObject();
-            a.put("name:", assignments.get(i).getName());
-            a.put("description:", assignments.get(i).getDescription());
-            a.put("duedate:", assignments.get(i).getDueDate());
-            a.put("completion:", assignments.get(i).getIsCompleted());
-            list.add(a);
+        for(int i = 0; i < users.size(); i++) {
+            JSONObject currUser = new JSONObject();
+            currUser.put("username:", users.get(i).getUsername());
+            currUser.put("password:", users.get(i).getPassword());
+            JSONArray userAssignmentsJSON = new JSONArray();
+            ArrayList<Assignment> userAssignments = users.get(i).getAssignments();
+            for(int j = 0; j < userAssignments.size(); j++) {
+                JSONObject a = new JSONObject();
+                a.put("name:", userAssignments.get(j).getName());
+                a.put("description:", userAssignments.get(j).getDescription());
+                a.put("duedate:", userAssignments.get(j).getDueDate());
+                a.put("completion:", userAssignments.get(j).getIsCompleted());
+                userAssignmentsJSON.add(a);
+            }
+            currUser.put("tasks:", userAssignmentsJSON);
+            list.add(currUser);
         }
 
         try(FileWriter file  = new FileWriter(JSON_FILE_PATH)) {
@@ -36,8 +44,8 @@ public class DataManager {
         }
     }
 
-    public static ArrayList<Assignment> loadAssignments() {
-        ArrayList<Assignment> assignments = new ArrayList<Assignment>();
+    public static ArrayList<User> loadUsers() {
+        ArrayList<User> users = new ArrayList<User>();
 
         try {
             FileReader reader = new FileReader(JSON_FILE_PATH);
@@ -45,24 +53,34 @@ public class DataManager {
             JSONArray aJSON = (JSONArray)new JSONParser().parse(reader);
 
             for(int i = 0; i < aJSON.size(); i++) {
-                JSONObject assignmentJSON = (JSONObject)aJSON.get(i);
-                String name = (String)assignmentJSON.get("name:");
-                String description = (String)assignmentJSON.get("description:");
-                String dueDate = (String)assignmentJSON.get("duedate:");
-                boolean isCompleted = (boolean)assignmentJSON.get("completion:");
-                Assignment a = new Assignment(name, description, dueDate);
-                if(isCompleted) {
-                    a.changeCompletion();
+                JSONObject userInfoJSON = (JSONObject)aJSON.get(i);
+                String username = (String)userInfoJSON.get("username:");
+                String password = (String)userInfoJSON.get("password:");
+
+                JSONArray userTasks = (JSONArray)userInfoJSON.get("tasks:");
+                ArrayList<Assignment> aS = new ArrayList<>();
+                for(int j = 0; j < userTasks.size(); j++) {
+                    JSONObject taskInfo = (JSONObject)userTasks.get(j);
+                    String name = (String)taskInfo.get("name:");
+                    String description = (String)taskInfo.get("description:");
+                    String dueDate = (String)taskInfo.get("duedate:");
+                    boolean isCompleted = (boolean)taskInfo.get("completion:");
+                    Assignment a = new Assignment(name, description, dueDate);
+                    if(isCompleted) {
+                        a.changeCompletion();
+                    }
+                    aS.add(a);
                 }
-                assignments.add(a);
+                User u = new User(username, password, aS);
+                users.add(u);
             }
-            return assignments;
+            return users;
             
         } catch (Exception e) {
-            System.out.println("Couldnt find File. " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Couldnt find file or file is empty. " + e.getMessage());
+            return new ArrayList<User>();
         }
-        return null;
+        
 
 
     }
