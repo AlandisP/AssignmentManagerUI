@@ -59,7 +59,7 @@ public class TaskManagerHome implements Initializable {
     private AssignmentManager library;
     private User currUser;
 
-
+    //Inits. all objects and objects used in scene builder. Displays user information too.
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         library = AssignmentManager.getInstance();
@@ -74,7 +74,7 @@ public class TaskManagerHome implements Initializable {
         taskTable.setItems(getTasks());
         progressIndicator.setProgress(currUser.getProgressPercentage());
     }
-
+    //gets the tasks for the tableview
     public ObservableList<Assignment> getTasks() {
         ObservableList<Assignment> tasks = FXCollections.observableArrayList();
 
@@ -86,7 +86,7 @@ public class TaskManagerHome implements Initializable {
 
         return tasks;   
     }
-
+    //deletes the task. 
     @FXML
     void deleteTask(ActionEvent e) {
         int selectedTask = taskTable.getSelectionModel().getSelectedIndex();
@@ -96,7 +96,8 @@ public class TaskManagerHome implements Initializable {
         DataManager.saveUsers();
         updateProgress();
     }
-
+    //sends you to the edit task screen with the selected task
+    //may be some bugs.
     @FXML
     void editTask(ActionEvent e) throws IOException {
         Assignment selectedAssignment = taskTable.getSelectionModel().getSelectedItem();
@@ -106,16 +107,16 @@ public class TaskManagerHome implements Initializable {
          }
          
     }
-
+    //sends you to the add task screen
     @FXML
     void addTask(ActionEvent e) throws IOException {
         App.setRoot("addScreen");
     }
-
+    //updates the progress percentage to show
     private void updateProgress() {
         progressIndicator.setProgress(currUser.getProgressPercentage() / 100.0);
     }
-
+    //logs the user out.
     @FXML
     void logout(ActionEvent e) throws IOException {
         library.logout();

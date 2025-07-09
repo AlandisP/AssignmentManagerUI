@@ -11,7 +11,6 @@ import com.aui.model.Assignment;
 import com.aui.model.AssignmentManager;
 import com.aui.model.DataManager;
 import com.aui.model.User;
-import com.aui.model.UserList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
@@ -50,7 +49,7 @@ public class AddScreenController implements Initializable {
     private AssignmentManager library;
     private User currUser;
 
-
+    //Initializes the necessary things to show details on the screen.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         library = AssignmentManager.getInstance();   
@@ -58,7 +57,8 @@ public class AddScreenController implements Initializable {
         addedAlert.setVisible(false);
     }
 
-
+    //Confirms all details of the tasks
+    //default values will be set if some things are left empty
     @FXML
     void confirm(ActionEvent e) {
         String name = "No Name";
@@ -90,7 +90,7 @@ public class AddScreenController implements Initializable {
     void backButton(MouseEvent event) throws IOException{
         App.setRoot("taskManagerHome");
     }
-
+    //Little animation for confirmation
     private void playAnimation() {
         FadeTransition fadeInAnimation = new FadeTransition(Duration.millis(2000), addedAlert);
         fadeInAnimation.setFromValue(0);

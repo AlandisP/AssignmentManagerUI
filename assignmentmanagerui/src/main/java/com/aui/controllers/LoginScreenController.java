@@ -33,11 +33,11 @@ public class LoginScreenController implements Initializable{
     private Label errorMessage;
 
     private AssignmentManager lib;
-
+    //initializes the lib
     public void initialize(URL url, ResourceBundle rb) {
         lib = AssignmentManager.getInstance();
     }
-
+    //makes sure details are correct when loggin in. It checks for errors as well.
     @FXML
     void login(ActionEvent e) throws IOException {
         String userName = usernameBox.getText();

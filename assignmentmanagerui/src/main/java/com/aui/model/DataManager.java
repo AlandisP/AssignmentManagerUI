@@ -9,9 +9,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 public class DataManager {
 
-    private static final String DATA_DIR = System.getProperty("user.home");
-    private static final String JSON_FILE_PATH = "assignmentmanagerui/src/main/java/com/aui/data/Users.json";
+    private static final String DATA_DIR = System.getProperty("user.home"); //just used this in case I wanted to make it an official application
+    private static final String JSON_FILE_PATH = "assignmentmanagerui/src/main/java/com/aui/data/Users.json"; //file path
 
+    //This method uses JSON parsing the put users in a JSON with all of there information. (Name. Password, Tasks)
     public static void saveUsers() {
         UserList uL = UserList.getInstance();
         ArrayList<User> users = uL.getUsers();
@@ -44,6 +45,7 @@ public class DataManager {
         }
     }
 
+    //This returns information read from a JSON to an ArrayList so we can have all the User Data in a list
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<User>();
 
@@ -59,7 +61,7 @@ public class DataManager {
 
                 JSONArray userTasks = (JSONArray)userInfoJSON.get("tasks:");
                 ArrayList<Assignment> aS = new ArrayList<>();
-                for(int j = 0; j < userTasks.size(); j++) {
+                for(int j = 0; j < userTasks.size(); j++) {//Nested for loops to access the array of assignments
                     JSONObject taskInfo = (JSONObject)userTasks.get(j);
                     String name = (String)taskInfo.get("name:");
                     String description = (String)taskInfo.get("description:");
@@ -78,7 +80,7 @@ public class DataManager {
             
         } catch (Exception e) {
             System.out.println("Couldnt find file or file is empty. " + e.getMessage());
-            return new ArrayList<User>();
+            return new ArrayList<User>();// returns an empty list if there aren't any users.
         }
         
 

@@ -41,7 +41,7 @@ public class CreateAccountController implements Initializable{
     private Label usernameError;
 
     private AssignmentManager lib;
-
+    //initializes the lib.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lib = AssignmentManager.getInstance();
@@ -51,7 +51,7 @@ public class CreateAccountController implements Initializable{
     void back(MouseEvent event) throws IOException{
         App.setRoot("loginScreen");
     }
-
+    //creates a new account, but makes sure details are correct with simple logic
     @FXML
     void createAccount(ActionEvent event) throws IOException {
         String userName = usernameBox.getText();

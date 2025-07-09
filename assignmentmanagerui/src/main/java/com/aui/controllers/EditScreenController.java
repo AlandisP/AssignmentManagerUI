@@ -12,7 +12,6 @@ import com.aui.model.Assignment;
 import com.aui.model.AssignmentManager;
 import com.aui.model.DataManager;
 import com.aui.model.User;
-import com.aui.model.UserList;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.FadeTransition;
@@ -65,7 +64,7 @@ public class EditScreenController implements Initializable{
     private User currUser;
     private Assignment currAssignment;
     
-
+    //initializes the lib, current user, and current assignment
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -81,6 +80,7 @@ public class EditScreenController implements Initializable{
         savedLabel.setVisible(false);   
     }
 
+    //confirms everything that has been changed. things that aren't changed are left alone.
     @FXML
     void confirm(ActionEvent e) {
 
@@ -109,7 +109,7 @@ public class EditScreenController implements Initializable{
         playAnimation(); 
         DataManager.saveUsers();
     }
-
+    //animation for saved label.
     private void playAnimation() {
         FadeTransition fadeInAnimation = new FadeTransition(Duration.millis(2000), savedLabel);
         fadeInAnimation.setFromValue(0);

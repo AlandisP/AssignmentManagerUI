@@ -5,19 +5,26 @@ import java.util.Date;
 
 public class Assignment {
 
-    private String name;
+    private String name;    
     private String description;
     //Due date should be in MM/DD/YYYY Formatting
     private String dueDate;
     private boolean isCompleted;
 
+    /**
+     * Constructs the Assignment object initializing the name, description, and duedate of the assignment
+     * completion status is always set to false initially.
+     * @param name the name of the Assignment/task
+     * @param description the assignments/tasks description
+     * @param dueDate the duedate of the assignment.task
+     */
     public Assignment(String name, String description, String dueDate) {
         this.name = name;
         this.description = description;
         setDueDate(dueDate);
         this.isCompleted = false;
     }
-
+    // Getters and Setters for the private variables
     public void setName(String name) {
         this.name = name;
     }
@@ -26,7 +33,7 @@ public class Assignment {
         this.description = d;
     }
 
-
+    //Uses the Local Date object and SimpleDateFormate to set a valid date and make sure the user isn't allowed to input anything invalid
     public void setDueDate(String d) {
         SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy");
         ft.setLenient(false);
@@ -71,7 +78,11 @@ public class Assignment {
         return isCompleted;
     }
     
+
     @Override
+    /**
+     * returns the assignment details
+     */
     public String toString() {
         return "Name: " + name + "\nDescription: " + description + "\nDue Date: " + dueDate + "\nCompleted: " + (isCompleted? "Yes" : "No");
     }

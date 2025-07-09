@@ -1,13 +1,23 @@
 package com.aui.model;
 import java.util.ArrayList;
-
+/**
+ * this is the User class
+ * it has the needed details for the user and other things to help the program function.
+ */
 public class User {
 
     private String username;
     private String password;
     private ArrayList<Assignment> assignments;
-    private Assignment currentAssignment;
+    private Assignment currentAssignment; //this here is used as a selector. If theres something in the list then it would be the first element
+                                            //if nothing its null. This just used for selecting assignments to edit.
 
+    /**
+     * constructs the user object
+     * @param uN the username
+     * @param pW the password
+     * @param a the arraylist of assignments
+     */
     public User(String uN, String pW, ArrayList<Assignment> a) {
         this.username = uN;
         this.password = pW;
@@ -18,7 +28,7 @@ public class User {
             currentAssignment = null;
         }
     }
-
+    //Getters and Setters
     public void setUsername(String uN) {
         this.username = uN;
     }
@@ -46,7 +56,10 @@ public class User {
     public ArrayList<Assignment> getAssignments() {
         return assignments;
     }
-
+    /**
+     * this gets the progress percentage based on if something is completed or not
+     * @return returns a double of the progress percentage. Had to cast due to issues with int and double operations
+     */
     public double getProgressPercentage() {
         if (assignments.isEmpty()) {
             return 0.0; 
@@ -80,11 +93,18 @@ public class User {
         }
         return str;
     }
-
+    /**
+     * adds a assignment to the list
+     * @param a the Assignment object 
+     */
     public void addAssignment(Assignment a) {
         this.assignments.add(a);
     }
-
+    /**
+     * this finds an assignment by name
+     * @param name the given name
+     * @return return the assignment with that selected name or null if it isn't found
+     */
     public  Assignment findAssignmentByName(String name) {
         for(int i = 0; i < assignments.size(); i++) {
             if(assignments.get(i).getName().equalsIgnoreCase(name)) {
@@ -92,7 +112,7 @@ public class User {
             }
         }        return null;
     }
-
+    //deletes the assignment from the list(object)
     public void deleteAssignment(Assignment a) {
         assignments.remove(a);
     }
