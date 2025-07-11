@@ -68,7 +68,7 @@ public class TaskManagerHome implements Initializable {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("description"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("dueDate"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<Assignment, String>("displayDate"));
         completionColumn.setCellValueFactory(new PropertyValueFactory<Assignment, Boolean>("isCompleted"));
 
         taskTable.setItems(getTasks());
@@ -89,12 +89,17 @@ public class TaskManagerHome implements Initializable {
     //deletes the task. 
     @FXML
     void deleteTask(ActionEvent e) {
-        int selectedTask = taskTable.getSelectionModel().getSelectedIndex();
         Assignment selectedA = taskTable.getSelectionModel().getSelectedItem();
-        currUser.deleteAssignment(selectedA);
-        taskTable.getItems().remove(selectedTask);
-        DataManager.saveUsers();
-        updateProgress();
+        if (selectedA != null) {
+            currUser.deleteAssignment(selectedA);
+
+            taskTable.getItems().clear();
+            taskTable.setItems(getTasks());
+
+
+            DataManager.saveUsers();
+            updateProgress();
+        }
     }
     //sends you to the edit task screen with the selected task
     //may be some bugs.
@@ -114,7 +119,7 @@ public class TaskManagerHome implements Initializable {
     }
     //updates the progress percentage to show
     private void updateProgress() {
-        progressIndicator.setProgress(currUser.getProgressPercentage() / 100.0);
+        progressIndicator.setProgress(currUser.getProgressPercentage());
     }
     //logs the user out.
     @FXML

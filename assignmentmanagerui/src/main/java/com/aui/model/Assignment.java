@@ -42,11 +42,14 @@ public class Assignment {
             Date inputDate = ft.parse(d);
             Date currentDate = new Date();
 
-            if (inputDate.after(currentDate)) {
-                this.dueDate = d;
-            } else {
-                this.dueDate = ft.format(currentDate);
-            }
+            //  Since im using the caldenar in my UI I no longer need this logic.
+            // if (inputDate.after(currentDate)) {
+            //     this.dueDate = d;
+            // } else {
+            //     this.dueDate = ft.format(currentDate);
+            // }
+            this.dueDate = d;
+
         } catch (Exception e) {
             // Invalid format or invalid date
             this.dueDate = ft.format(new Date()); 
@@ -77,7 +80,30 @@ public class Assignment {
     public boolean getIsCompleted() {
         return isCompleted;
     }
-    
+
+    //  Adds (Overdue) to an assignments date to show if its overdue. helps with the table view
+    public String getDisplayDate() {
+    if (isOverdue()) {
+        return getDueDate() + " (Overdue)";
+    }
+    return getDueDate();
+}
+    /**
+     * logic sees if an Assignment is Overdue
+     * @return true if the assignment is overdue, false otherwise
+     */
+    public boolean isOverdue() {
+        try {
+            SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy"); 
+            Date aDate = ft.parse(getDueDate());
+            Date currentDate = new Date();
+        
+            return !getIsCompleted() && aDate.before(currentDate);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     @Override
     /**
