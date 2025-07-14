@@ -12,3 +12,8 @@ then moved on to building the actual UI design. This process really helped me un
 One of the biggest learning experiences was figuring out how to use CSS with JavaFX to style the interface. I spent a lot of time working on the visual design and color schemes to make sure the 
 application looked professional and wasn't just bland or boring to use. Overall, this project showed me what it's really like to develop a complete desktop application, 
 and it was an amazing experience putting all these different technologies together to create something functional and have visual aspects.
+
+
+Demo Video:
+https://github.com/user-attachments/assets/0369b429-0e49-4086-a272-d770e5011b11
+
