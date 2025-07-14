@@ -15,5 +15,5 @@ and it was an amazing experience putting all these different technologies togeth
 
 
 Demo Video:
-https://github.com/user-attachments/assets/0369b429-0e49-4086-a272-d770e5011b11](https://github.com/AlandisP/AssignmentManagerUI/issues/1
+https://github.com/user-attachments/assets/258e8855-dddd-4e0f-8e55-8096e534d0c2
 
