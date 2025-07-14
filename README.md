@@ -15,5 +15,5 @@ and it was an amazing experience putting all these different technologies togeth
 
 
 Demo Video:
-https://github.com/user-attachments/assets/258e8855-dddd-4e0f-8e55-8096e534d0c2
+https://github.com/user-attachments/assets/77c146ba-a838-4b09-877f-be874db06aa5
 
